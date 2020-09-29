@@ -37,6 +37,7 @@ type Client struct {
 	Client       *http.Client
 	BaseURL      *url.URL
 	Auth         *AuthService
+	Repositories *RepositoryService
 	Webhooks     *WebhookService
 	DumpResponse func(*http.Response, bool) ([]byte, error)
 }
@@ -57,6 +58,7 @@ func NewClient(uri string) (*Client, error) {
 	s := &service{new(Client)}
 	s.client.BaseURL = base
 	s.client.Auth = (*AuthService)(s)
+	s.client.Repositories = (*RepositoryService)(s)
 	s.client.Webhooks = (*WebhookService)(s)
 
 	return s.client, nil
